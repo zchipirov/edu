@@ -1,17 +1,10 @@
-import statistics 
-class IntDataFrame:
-    def __init__(self, lst):
-        self.lst = list(map(int, lst))
-        
-    def count(self):
-        return len(list(filter(lambda x: x>0, self.lst)))
-    
-    def unique(self):
-        return len(set(self.lst))
-    
-df = IntDataFrame([4.7, 4, 3, 0, 2.4, 0.3, 4])
+products = {'Oranges (packaged)': 114.99, 'Candy (Rotfront)': 280.0, 'Boiled sausage': 199.99, 'Juice J7 (orange)': 119.99, 'Trout (Seven Seas)': 399.99}
+stocks = {'Boiled sausage': '33%', 'Juice J7 (orange)': '12%', 'Trout (Seven Seas)': '18%'}
 
-print(df.count())
-# => 5
-print(df.unique())
-# => 4
+def apply_discounts(products, stocks):
+    for key, val  in products.items():
+        if key in stocks.keys():
+            products[key] = round(products[key] - products[key]*int(stocks[key].replace('%', ''))/100, 2)
+    return products
+        
+print(apply_discounts(products, stocks))
